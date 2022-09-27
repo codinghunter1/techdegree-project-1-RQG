@@ -74,7 +74,7 @@ const quotes = [
     quote:     "Remember that the happiest people are not those getting more, but those giving more",
     source:    "H. Jackson Brown, Jr.",
     citation:  "Book",
-    year:      197,
+    year:      1972,
     tag:       "Life"
   },
   //Quote 9
@@ -92,7 +92,7 @@ const quotes = [
     quote:     "When I dare to be powerful – to use my strength in the service of my vision, then it becomes less and less important whether I am afraid",
     source:    "Audre Lorde",
     citation:  "Book",
-    year:      1983,
+    //year:      1983,
     tag:       "Inspirational"
   },
   //Quote 11
@@ -102,14 +102,14 @@ const quotes = [
     source:    "DOLLY PARTON",
     citation:  "Website",
     year:      1991,
-    tag:       "Life"
+    //tag:       "Life"
   },
   //Quote 12
   {
     //Properties
     quote:     "Spread love everywhere you go. Let no one ever come to you without leaving happier",
     source:    "Mother Teresa",
-    citation:  "Book",
+    //citation:  "Book",
     year:      1973,
     tag:       "Life"
   },
@@ -120,7 +120,7 @@ const quotes = [
     source:    "Robert Louis Stevenson",
     citation:  "Website",
     year:      1880,
-    tag:       "Life"
+    //tag:       "Life"
   },
   //Quote 14
   {
@@ -145,7 +145,7 @@ const quotes = [
     //Properties
     quote:     "The best and most beautiful things in the world cannot be seen or even touched — they must be felt with the heart",
     source:    "Helen Keller",
-    citation:  "Website",
+    //citation:  "Website",
     year:      1938,
     tag:       "Life"
   },
@@ -155,7 +155,7 @@ const quotes = [
     quote:     "Do not go where the path may lead, go instead where there is no path and leave a trail",
     source:    "Ralph Waldo Emerson",
     citation:  "Website",
-    year:      1873,
+    //year:      1873,
     tag:       "Life"
   },
   //Quote 18
@@ -163,7 +163,7 @@ const quotes = [
     //Properties
     quote:     "In the end, it's not the years in your life that count. It's the life in your years",
     source:    "Abraham Lincoln",
-    citation:  "Book",
+    //citation:  "Book",
     year:      1845,
     tag:       "Life"
   },
@@ -174,7 +174,7 @@ const quotes = [
     source:    "Bob Marley",
     citation:  "Song",
     year:      1969,
-    tag:       "Life"
+    //tag:       "Life"
   },
   //Quote 19
   {
@@ -182,7 +182,7 @@ const quotes = [
     quote:     "Success usually comes to those who are too busy to be looking for it",
     source:    "Henry David Thoreau",
     citation:  "Website",
-    year:      1843,
+    //year:      1843,
     tag:       "Life"
   }  
 ]
@@ -202,26 +202,40 @@ function printQuote() {
   let writing = quotes[randomNumber]; //set writing to array of the subject object quotes properties
   
   html =  //create string of html printing data and formatting
-         `<p class = "quote"><strong>${writing.quote}</strong></p>
-          <p align="right"><em> - ${writing.source}, ${writing.citation}, ${writing.year}, ${writing.tag}</em></>`;
+         ` <p class = "quote"> ${writing.quote}  </p>
+           <p class ="source"> ${writing.source} `;
   
-  document.querySelector('main').innerHTML = html; //send printing data and formatting (html) to the html file in the <main></main> section 
+  if (writing.hasOwnProperty('citation') == true) {
+    html = html.concat(`<span class = "citation"> ${writing.citation} </span>`);
+  }
+  if (writing.hasOwnProperty('year') == true) {
+    html = html.concat(`<span class = "year">     ${writing.year}     </span>`);
+  }
+  if (writing.hasOwnProperty('tag') == true) {
+    html = html.concat(`<span class = "tag">      ${writing.tag}      </span>`);
+  }
+  html = html.concat(`</p>`);
+  
+  document.getElementById('quote-box').innerHTML = html; 
 }
- /* 
- function getRandomQuote(){
-       randomNumber  = Math.floor(Math.random() * quotes.length) + 1;
-       console.log(randomNumber);
-       printQuote(randomNumber);   
- }
-*/
+
+
+
+
 let lastRandomNumber = 0; //declare varible
 let html = ' ';  //set variable empty 
 printQuote();  //call funtion
 
 
+const setBackGround = () => {  //function for creating random background colour
+  const randomColor = Math.floor(Math.random()*16777215).toString(16); //get random color HEX # value
+  document.body.style.backgroundColor = "#" + randomColor; 
+}
+genNewBackGround.addEventListener("click", setBackGround); //change background when click is used on setbackground
+setBackGround(); //call function 
+
+
 /***
-<p class="quote">Every great developer you know got there by solving problems they were unqualified to solve until they actually did it.</p>
-        <p class="source">Patrick McKenzie<span class="citation">Twitter</span><span class="year">2016</span></p>
  * click event listener for the print quote button
  * DO NOT CHANGE THE CODE BELOW!!
 ***/
